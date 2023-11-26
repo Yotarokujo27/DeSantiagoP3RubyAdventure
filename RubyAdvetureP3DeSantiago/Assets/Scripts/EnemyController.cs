@@ -11,6 +11,7 @@ public class EnemyController2 : MonoBehaviour
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
+    bool broken = true;
 
     Animator animator;
 
@@ -24,6 +25,12 @@ public class EnemyController2 : MonoBehaviour
 
     void Update()
     {
+        //remeber ! inverse the test, so if broken is true !broke will be false and return won't be executed.
+        if (!broken)
+        {
+            return;
+        }
+
         timer -= Time.deltaTime;
 
         if (timer < 0)
@@ -35,6 +42,12 @@ public class EnemyController2 : MonoBehaviour
 
     void FixedUpdate()
     {
+        //remember ! inverse the tese, so if broken is true !bro will be false and return won’t be executed.
+        if (!broken)
+        {
+            return;
+        }
+
         Vector2 position = rigidbody2D.position;
 
         if (vertical)
@@ -61,5 +74,14 @@ public class EnemyController2 : MonoBehaviour
         {
             player.ChangeHealth(-1);
         }
+    }
+
+    //Public because we want to call it from elsewhere like the projectile scrip
+    public void Fix()
+    {
+        broken = false;
+        rigidbody2D.simulated = false;
+        //optional if youadded the fixed animation
+        animator.SetTrigger("Fixed");
     }
 }
