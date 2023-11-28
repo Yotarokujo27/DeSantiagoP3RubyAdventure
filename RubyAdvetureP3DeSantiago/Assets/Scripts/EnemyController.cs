@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController2 : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public float speed;
     public bool vertical;
@@ -10,7 +10,7 @@ public class EnemyController2 : MonoBehaviour
 
     public ParticleSystem smokeEffect;
 
-    Rigidbody2D rigidbody2D;
+    new Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
     bool broken = true;
